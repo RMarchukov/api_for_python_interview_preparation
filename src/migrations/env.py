@@ -7,8 +7,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from db.db import Base
-from models.topics import Topics
-from models.questions import Questions
+
 
 config = context.config
 config.set_main_option("sqlalchemy.url", "sqlite+aiosqlite:///sqlite.db")

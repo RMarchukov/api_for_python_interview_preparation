@@ -23,8 +23,6 @@ async def add_question(
 
 
 @router.get("")
-async def get_questions(
-    questions_service: Annotated[QuestionsService, Depends(questions_service)]
-):
+async def get_questions(questions_service: Annotated[QuestionsService, Depends(questions_service)]):
     questions = await questions_service.get_questions()
     return questions

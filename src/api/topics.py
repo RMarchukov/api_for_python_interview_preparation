@@ -23,8 +23,6 @@ async def add_topic(
 
 
 @router.get("")
-async def get_topics(
-    topics_service: Annotated[TopicsService, Depends(topics_service)]
-):
+async def get_topics(topics_service: Annotated[TopicsService, Depends(topics_service)]):
     topics = await topics_service.get_topics()
     return topics
