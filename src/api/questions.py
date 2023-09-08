@@ -1,6 +1,7 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
+from fastapi_cache.decorator import cache
 
 from api.dependencies import questions_service
 from schemas.questions import QuestionSchemaAdd
@@ -23,6 +24,7 @@ async def add_question(
 
 
 @router.get("")
+@cache(expire=600)
 async def get_questions(questions_service: Annotated[QuestionsService, Depends(questions_service)]):
     questions = await questions_service.get_questions()
     return questions
