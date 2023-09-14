@@ -7,6 +7,7 @@ venv
 *.db
 __pycahe__
 .env-non-dev
+.env-render
 
 ### macOS ###
 # General
