@@ -7,7 +7,7 @@ from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 from db.db import Base
 from models.topics import Topics
 from models.questions import Questions
-from models.auth import Users, Roles
+from models.auth import Users
 
 
 sys.path.append(os.path.join(sys.path[0], 'src'))

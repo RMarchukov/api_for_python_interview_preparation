@@ -5,7 +5,7 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from api.routers import all_routers
 from auth.auth import auth_backend
-from auth.schemas import UserRead, UserCreate
+from schemas.auth import UserRead, UserCreate
 from config import REDIS_HOST, REDIS_PORT
 from fastapi_users import FastAPIUsers
 from models.auth import Users
