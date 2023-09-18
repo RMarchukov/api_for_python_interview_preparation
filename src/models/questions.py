@@ -1,6 +1,5 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-
 from db.db import Base
 from schemas.questions import QuestionSchema
 
