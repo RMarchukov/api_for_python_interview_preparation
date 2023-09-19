@@ -3,8 +3,8 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from fastapi_cache.decorator import cache
 
-from api.dependencies import questions_service
-from schemas.questions import QuestionSchemaAdd
+from api.dependencies import questions_service, current_user
+from schemas.questions import QuestionSchemaAdd, QuestionSchemaEdit
 from services.questions import QuestionsService
 
 
@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 
-@router.post("")
+@router.post("", dependencies=[Depends(current_user)])
 async def add_question(
     question: QuestionSchemaAdd,
     questions_service: Annotated[QuestionsService, Depends(questions_service)]
@@ -28,3 +28,22 @@ async def add_question(
 async def get_questions(questions_service: Annotated[QuestionsService, Depends(questions_service)]):
     questions = await questions_service.get_questions()
     return questions
+
+
+@router.patch("", dependencies=[Depends(current_user)])
+async def edit_question(
+        id: int,
+        question: QuestionSchemaEdit,
+        questions_service: Annotated[QuestionsService, Depends(questions_service)]
+):
+    question_id = await questions_service.edit_question(id, question)
+    return {"question_id": question_id}
+
+
+@router.delete("", dependencies=[Depends(current_user)])
+async def delete_question(
+        id: int,
+        questions_service: Annotated[QuestionsService, Depends(questions_service)]
+):
+    question_id = await questions_service.delete_question(id)
+    return {"question_id": question_id}

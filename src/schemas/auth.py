@@ -1,20 +1,26 @@
+from typing import Union
 from fastapi_users import schemas
-from pydantic import EmailStr
+from fastapi_users.schemas import model_dump
+from pydantic import EmailStr, BaseModel
 
 
 class UserRead(schemas.BaseUser[int]):
     id: int
     email: EmailStr
-    username: str
-    is_active: bool = True
-    is_superuser: bool = False
-    is_verified: bool = False
+    username: Union[str, None]
 
     class Config:
         from_attributes = True
 
 
-class UserCreate(schemas.BaseUserCreate):
-    username: str
+class UserCreate(BaseModel):
+    username: Union[str, None]
     email: EmailStr
     password: str
+
+    def create_update_dict(self):
+        return model_dump(self)
+
+
+class UserUpdate(schemas.BaseUserUpdate):
+    pass

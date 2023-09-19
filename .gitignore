@@ -6,6 +6,7 @@ venv
 *.pptx
 *.db
 __pycahe__
+.env
 .env-non-dev
 .env-render
 

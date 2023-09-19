@@ -1,10 +1,15 @@
 from typing import Optional
 from fastapi import Depends, Request
-from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 from models.auth import Users, get_user_db
+from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas, FastAPIUsers
+from fastapi_users.authentication import CookieTransport, AuthenticationBackend, JWTStrategy
+from config import SECRET, CLIENT_ID, CLIENT_SECRET
+from httpx_oauth.clients.google import GoogleOAuth2
 
 
-SECRET = "1b5c33df0110f4dccefdcb8930f3b8e22865f51844b165078b98edc6f546c1ef"
+SECRET = SECRET
+
+client = GoogleOAuth2(CLIENT_ID, CLIENT_SECRET)
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[Users, int]):
@@ -43,3 +48,21 @@ class UserManager(IntegerIDMixin, BaseUserManager[Users, int]):
 
 async def get_user_manager(user_db=Depends(get_user_db)):
     yield UserManager(user_db)
+
+cookie_transport = CookieTransport(cookie_max_age=3600)
+
+
+def get_jwt_strategy() -> JWTStrategy:
+    return JWTStrategy(secret=SECRET, lifetime_seconds=3600)
+
+
+auth_backend = AuthenticationBackend(
+    name="jwt",
+    transport=cookie_transport,
+    get_strategy=get_jwt_strategy,
+)
+
+fastapi_users = FastAPIUsers[Users, int](
+    get_user_manager,
+    [auth_backend],
+)

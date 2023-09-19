@@ -1,10 +1,9 @@
 from schemas.topics import TopicSchemaAdd
-from utils.repository import AbstractRepository
 
 
 class TopicsService:
-    def __init__(self, topics_repository: AbstractRepository):
-        self.topics_repository: AbstractRepository = topics_repository()
+    def __init__(self, topics_repository):
+        self.topics_repository = topics_repository()
 
     async def add_topic(self, topic: TopicSchemaAdd) -> int:
         topic_dict = topic.model_dump()

@@ -17,5 +17,6 @@ class QuestionSchemaAdd(BaseModel):
     topic_id: int
 
 
-# class QuestionSchemaEdit(BaseModel):
-#     answer: str
+class QuestionSchemaEdit(BaseModel):
+    title: str
+    answer: str

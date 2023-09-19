@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends
 
-from api.dependencies import topics_service
+from api.dependencies import topics_service, current_user
 from schemas.topics import TopicSchemaAdd
 from services.topics import TopicsService
 
@@ -13,7 +13,7 @@ router = APIRouter(
 )
 
 
-@router.post("")
+@router.post("", dependencies=[Depends(current_user)])
 async def add_topic(
     topic: TopicSchemaAdd,
     topics_service: Annotated[TopicsService, Depends(topics_service)]
