@@ -33,8 +33,8 @@ class SQLAlchemyRepository:
             await session.commit()
             return res.scalar_one()
 
-    # async def find_one(self, **filter_by):
-    #     stmt = select(self.model).filter_by(**filter_by)
-    #     res = await self.session.execute(stmt)
-    #     res = res.scalar_one().to_read_model()
-    #     return res
+    async def find_one(self, **filter_by):
+        async with async_session_maker() as session:
+            stmt = select(self.model).filter_by(**filter_by)
+            res = await session.execute(stmt)
+            return res

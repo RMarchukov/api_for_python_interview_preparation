@@ -11,3 +11,7 @@ class TopicSchema(BaseModel):
 
 class TopicSchemaAdd(BaseModel):
     name: str
+
+
+class TopicSchemaEdit(BaseModel):
+    name: str

@@ -47,3 +47,13 @@ async def delete_question(
 ):
     question_id = await questions_service.delete_question(id)
     return {"question_id": question_id}
+
+
+@router.get("/one")
+async def get_one_question(
+        id: int,
+        questions_service: Annotated[QuestionsService, Depends(questions_service)]
+):
+    question = await questions_service.get_one_question(id)
+    res = question.scalar_one()
+    return res

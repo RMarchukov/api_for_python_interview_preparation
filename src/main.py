@@ -5,7 +5,10 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from api.routers import all_routers
 from config import REDIS_HOST, REDIS_PORT
+import logging
 
+
+logging.basicConfig(level=logging.DEBUG)
 
 app = FastAPI(
     title="python_interview_preparation"

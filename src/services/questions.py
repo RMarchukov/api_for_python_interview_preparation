@@ -23,3 +23,7 @@ class QuestionsService:
     async def delete_question(self, id: int):
         question_id = await self.questions_repository.delete_one(id)
         return question_id
+
+    async def get_one_question(self, id: int):
+        question = await self.questions_repository.find_one(id=id)
+        return question
