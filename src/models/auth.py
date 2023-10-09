@@ -27,7 +27,7 @@ class Users(SQLAlchemyBaseUserTable[int], Base):
     username: Mapped[str] = mapped_column(nullable=True)
     hashed_password: Mapped[str] = mapped_column(nullable=False)
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
-    is_superuser: Mapped[bool] = mapped_column(default=False, nullable=False)
+    is_superuser: Mapped[bool] = mapped_column(default=True, nullable=False)
     is_verified: Mapped[bool] = mapped_column(default=False, nullable=False)
 
 
