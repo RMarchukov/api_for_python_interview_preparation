@@ -12,9 +12,9 @@ COPY . .
 
 RUN chmod a+x docker/*.sh
 
-RUN alembic revision --autogenerate -m "new"
+RUN alembic current
 
-RUN alembic upgrade head
+RUN alembic upgrade current
 
 WORKDIR src
 
