@@ -13,7 +13,7 @@ class Questions(Base):
 
     @declared_attr
     def topic_id(cls) -> Mapped[int]:
-        return mapped_column(ForeignKey("topics_id", ondelete="cascade"), nullable=True)
+        return mapped_column(ForeignKey("topics.id", ondelete="cascade"), nullable=True)
 
     @declared_attr
     def user_id(cls) -> Mapped[int]:
