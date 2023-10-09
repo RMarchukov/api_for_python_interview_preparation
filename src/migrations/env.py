@@ -4,7 +4,7 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
-from db.db import Base
+from db.db import Base, metadata
 from models.topics import Topics
 from models.questions import Questions
 from models.auth import Users
@@ -32,7 +32,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = Base.metadata
+target_metadata = [metadata, Base.metadata]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
