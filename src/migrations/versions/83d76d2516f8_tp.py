@@ -1,7 +1,7 @@
 """tp
 
 Revision ID: 83d76d2516f8
-Revises: 64784d669e40
+Revises:
 Create Date: 2023-10-05 11:56:53.456493
 
 """
