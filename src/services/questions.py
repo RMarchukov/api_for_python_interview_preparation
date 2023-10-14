@@ -1,4 +1,4 @@
-from schemas.questions import QuestionSchemaAdd, QuestionSchemaEdit
+from schemas.questions import QuestionSchemaAdd, QuestionSchemaEdit, UserQuestionSchemaAdd
 from repositories.questions import QuestionsRepository
 
 
@@ -27,3 +27,13 @@ class QuestionsService:
     async def get_one_question(self, id: int):
         question = await self.questions_repository.find_one(id=id)
         return question
+
+    async def get_user_questions(self, user_id: int):
+        questions = await self.questions_repository.find_all_by_user(user_id=user_id)
+        return questions
+
+    async def add_user_question(self, question: UserQuestionSchemaAdd, user_id: int) -> int:
+        question_dict = question.model_dump()
+        question_dict.update({"user_id": user_id})
+        question_id = await self.questions_repository.add_one_by_user(question_dict)
+        return question_id

@@ -1,7 +1,5 @@
 from typing import Annotated
-
 from fastapi import APIRouter, Depends
-
 from api.dependencies import topics_service, current_user
 from schemas.topics import TopicSchemaAdd, TopicSchemaEdit
 from services.topics import TopicsService

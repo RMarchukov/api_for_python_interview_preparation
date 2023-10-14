@@ -23,3 +23,8 @@ class QuestionSchemaAdd(BaseModel):
 class QuestionSchemaEdit(BaseModel):
     title: str
     answer: str
+
+
+class UserQuestionSchemaAdd(BaseModel):
+    title: str
+    answer: str

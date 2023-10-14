@@ -14,3 +14,4 @@ def topics_service():
 
 
 current_user = fastapi_users.current_user()
+current_superuser = fastapi_users.current_user(active=True, superuser=True)
