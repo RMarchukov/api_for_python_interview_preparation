@@ -37,3 +37,12 @@ class QuestionsService:
         question_dict.update({"user_id": user_id})
         question_id = await self.questions_repository.add_one_by_user(question_dict)
         return question_id
+
+    async def edit_user_question(self, id: int, user_id: int, question: QuestionSchemaEdit):
+        question_dict = question.model_dump()
+        question_id = await self.questions_repository.edit_one_by_user(id, user_id, question_dict)
+        return question_id
+
+    async def delete_user_question(self, id: int, user_id: int):
+        question_id = await self.questions_repository.delete_one_by_user(id, user_id)
+        return question_id

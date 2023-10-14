@@ -52,3 +52,17 @@ class SQLAlchemyRepository:
             res = await session.execute(stmt)
             await session.commit()
             return res.scalar_one()
+
+    async def edit_one_by_user(self, id: int, user_id: int, data: dict) -> int:
+        async with async_session_maker() as session:
+            stmt = update(self.model).values(**data).filter_by(id=id, user_id=user_id).returning(self.model.id)
+            res = await session.execute(stmt)
+            await session.commit()
+            return res.scalar_one()
+
+    async def delete_one_by_user(self, id: int, user_id: int) -> int:
+        async with async_session_maker() as session:
+            stmt = delete(self.model).filter_by(id=id, user_id=user_id).returning(self.model.id)
+            res = await session.execute(stmt)
+            await session.commit()
+            return res.scalar_one()
